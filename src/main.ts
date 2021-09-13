@@ -7,7 +7,7 @@ import * as open from 'open'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.setGlobalPrefix('api')
-  return app.listen(process.env.NODE_ENV === 'dev' ? 4000 : 0)
+  return app.listen(process.env.NODE_ENV === 'development' ? 4000 : 0)
 }
 
 bootstrap().then(async (app) => {
