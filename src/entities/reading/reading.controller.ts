@@ -2,33 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ReadingService } from './reading.service';
 import { CreateReadingDto } from './dto/create-reading.dto';
 import { UpdateReadingDto } from './dto/update-reading.dto';
+import { CommonControllerController } from '../../common/common-controller/common-controller.controller'
+import { Reading } from './entities/reading.entity'
 
 @Controller('reading')
-export class ReadingController {
-  constructor(private readonly readingService: ReadingService) {}
-
-  @Post()
-  create(@Body() createReadingDto: CreateReadingDto) {
-    return this.readingService.create(createReadingDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.readingService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.readingService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReadingDto: UpdateReadingDto) {
-    return this.readingService.update(+id, updateReadingDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.readingService.remove(+id);
+export class ReadingController extends CommonControllerController<ReadingService>{
+  constructor(private readonly readingService: ReadingService) {
+    super(readingService)
   }
 }

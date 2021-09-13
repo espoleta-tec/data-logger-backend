@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
 
 @Module({
   imports: [
@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'data/variables.sqlite',
       logging: true,
       autoLoadEntities: true,
+      synchronize: true,
     }),
   ],
 })

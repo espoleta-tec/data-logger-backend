@@ -1,26 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateStationDto } from './dto/create-station.dto';
-import { UpdateStationDto } from './dto/update-station.dto';
+import { Injectable } from '@nestjs/common'
+import { CommonServiceService } from '../../common/common-service/common-service.service'
+import { StationRepo } from './station.repo'
 
 @Injectable()
-export class StationService {
-  create(createStationDto: CreateStationDto) {
-    return 'This action adds a new station';
+export class StationService extends CommonServiceService<StationRepo> {
+  constructor(public readonly repo: StationRepo) {
+    super(repo)
   }
 
-  findAll() {
-    return `This action returns all station`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} station`;
-  }
-
-  update(id: number, updateStationDto: UpdateStationDto) {
-    return `This action updates a #${id} station`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} station`;
-  }
 }
