@@ -12,5 +12,5 @@ async function bootstrap() {
 
 bootstrap().then(async (app) => {
   new Logger('APP').log('Server started')
-  await open(`http://127.0.0.1:${app.address().port}`)
+  // await open(`http://127.0.0.1:${app.address().port}`)
 })
