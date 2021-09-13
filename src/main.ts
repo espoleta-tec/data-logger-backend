@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
+import { Logger } from '@nestjs/common'
 
 const PORT = 4000
 
@@ -10,6 +11,6 @@ async function bootstrap() {
 }
 
 bootstrap().then(async () => {
-  console.log('Server started')
+  new Logger('APP').log('Server started')
   // await open(`http://127.0.0.1:${PORT}`)
 })
