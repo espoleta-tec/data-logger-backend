@@ -1,7 +1,6 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { StationSettings } from './station-settings.entity'
 import { OperationModeEnum } from '../types/operation-mode.enum'
-import { String2ObjectTransformer } from '../../../common/transfomers/string-2-object.transformer'
 
 @Entity()
 export class Station {
@@ -20,18 +19,17 @@ export class Station {
   @Column({ default: null })
   password: string
 
-  @Column({ default: null })
+  @Column()
   hostname: string
 
-  @Column({
-    type: 'text', transformer: new String2ObjectTransformer<OperationModeEnum>(),
+  @Column('text', {
     default: OperationModeEnum.AP,
   })
   connectionMode: OperationModeEnum
 
   @OneToOne(() => StationSettings,
     (settings) => settings.Station,
-    { cascade: true, eager: true })
+    { cascade: ['insert', 'update', 'remove', 'recover'], eager: true })
   @JoinColumn()
   Settings: StationSettings
 }

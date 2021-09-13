@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
 
 export class CommonServiceService<EntityRepo extends Repository<any>> {
@@ -19,7 +18,7 @@ export class CommonServiceService<EntityRepo extends Repository<any>> {
   }
 
   async update(id: number, updateDto: any) {
-    return this._repository.update(id, updateDto)
+    return this._repository.save(Object.assign(updateDto, { id: id }))
   }
 
   async remove(id: number) {

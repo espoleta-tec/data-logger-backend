@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
+import { Body, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
 import { CommonServiceService } from '../common-service/common-service.service'
 
 export class CommonControllerController<EntityService extends CommonServiceService<any>> {
@@ -22,7 +22,7 @@ export class CommonControllerController<EntityService extends CommonServiceServi
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, updateDto: any) {
+  async update(@Param('id', ParseIntPipe) id: number,@Body() updateDto: any) {
     return this.service.update(id, updateDto)
   }
 

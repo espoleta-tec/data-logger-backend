@@ -9,15 +9,15 @@ export class StationSettings {
   @OneToOne(() => Station, (station) => station.Settings)
   Station: Station
 
-  @Column()
+  @Column({ default: 0 })
   generalReadDelay: number
 
-  @Column()
+  @Column({ default: 0 })
   precipitationReadDelay: number
 
-  @Column()
+  @Column({ default: 'admin' })
   username: string
 
-  @Column()
+  @Column({ default: 'adminpassword' })
   password: string
 }
