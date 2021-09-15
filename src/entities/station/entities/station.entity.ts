@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { StationSettings } from './station-settings.entity'
 import { OperationModeEnum } from '../types/operation-mode.enum'
+import { Reading } from '../../reading/entities/reading.entity'
 
 @Entity()
 export class Station {
@@ -32,4 +33,10 @@ export class Station {
     { cascade: ['insert', 'update', 'remove', 'recover'], eager: true })
   @JoinColumn()
   Settings: StationSettings
+
+  @OneToMany(() => Reading, (reading) => reading.Station, { eager: true })
+  Readings: Reading[]
+
+  @Column({ default: '0.0.1' })
+  version: string
 }

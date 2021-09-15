@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Station } from '../../station/entities/station.entity'
 
 @Entity()
 export class Reading {
@@ -22,4 +23,7 @@ export class Reading {
 
   @Column('double', { default: null })
   transpiration: number
+
+  @ManyToOne(() => Station, (station) => station.Readings)
+  Station: Station
 }
