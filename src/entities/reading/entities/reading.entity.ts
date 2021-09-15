@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Station } from '../../station/entities/station.entity'
 
 @Entity()
@@ -26,4 +26,13 @@ export class Reading {
 
   @ManyToOne(() => Station, (station) => station.Readings)
   Station: Station
+
+  @Column('datetime')
+  timestamp: Date
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 }
