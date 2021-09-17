@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import { Station } from '../../station/entities/station.entity'
 
 @Entity()
@@ -22,13 +30,17 @@ export class Reading {
   pressure: number
 
   @Column('double', { default: null })
-  transpiration: number
+  evapoTranspiration: number
+
+  @Column()
+  StationId: number
 
   @ManyToOne(() => Station, (station) => station.Readings)
+  @JoinColumn({name: 'StationId'})
   Station: Station
 
-  @Column('datetime')
-  timestamp: Date
+  @Column('datetime', { unique: true })
+  date: Date
 
   @CreateDateColumn()
   createdAt: Date
