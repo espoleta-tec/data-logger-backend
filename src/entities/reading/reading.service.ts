@@ -9,7 +9,6 @@ export class ReadingService extends CommonServiceService<ReadingRepo> {
     super(repo)
   }
 
-
   async create(createDto: CreateReadingDto | CreateReadingDto[]) {
     let queryBuilder = this.repo.createQueryBuilder('c')
 
@@ -21,11 +20,6 @@ export class ReadingService extends CommonServiceService<ReadingRepo> {
         { date, StationId })
     })
 
-    const existentReadings = await queryBuilder.getMany()
-    const readingsLeft = createDto.filter(dto =>
-      existentReadings.find(eto => eto.id === dto.id) === undefined)
-
-
-    return super.create(readingsLeft)
+    return super.create(createDto)
   }
 }

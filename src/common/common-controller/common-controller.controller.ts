@@ -1,4 +1,4 @@
-import { Body, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
+import { Body, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
 import { CommonServiceService } from '../common-service/common-service.service'
 
 export class CommonControllerController<EntityService extends CommonServiceService<any>> {
@@ -30,4 +30,6 @@ export class CommonControllerController<EntityService extends CommonServiceServi
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.service.remove(id)
   }
+
+  private logger: Logger
 }

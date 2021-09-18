@@ -36,10 +36,10 @@ export class Reading {
   StationId: number
 
   @ManyToOne(() => Station, (station) => station.Readings)
-  @JoinColumn({name: 'StationId'})
+  @JoinColumn({ name: 'StationId' })
   Station: Station
 
-  @Column('datetime', { unique: true })
+  @Column('datetime')
   date: Date
 
   @CreateDateColumn()
