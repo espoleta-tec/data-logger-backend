@@ -32,10 +32,12 @@ export class Reading {
   @Column('double', { default: null })
   evapoTranspiration: number
 
-  @Column()
+  @Column({ nullable: true })
   StationId: number
 
-  @ManyToOne(() => Station, (station) => station.Readings)
+  @ManyToOne(() => Station, (station) => station.Readings, {
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'StationId' })
   Station: Station
 

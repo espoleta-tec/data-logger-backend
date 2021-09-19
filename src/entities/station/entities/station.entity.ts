@@ -34,7 +34,8 @@ export class Station {
   @JoinColumn()
   Settings: StationSettings
 
-  @OneToMany(() => Reading, (reading) => reading.Station, { eager: true })
+  @OneToMany(() => Reading, (reading) => reading.Station,
+    { eager: true, onDelete: 'SET NULL' })
   Readings: Reading[]
 
   @Column({ default: '0.0.1' })

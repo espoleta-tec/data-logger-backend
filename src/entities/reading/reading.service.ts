@@ -10,16 +10,17 @@ export class ReadingService extends CommonServiceService<ReadingRepo> {
   }
 
   async create(createDto: CreateReadingDto | CreateReadingDto[]) {
-    let queryBuilder = this.repo.createQueryBuilder('c')
 
     if (!Array.isArray(createDto)) {
       createDto = [createDto]
     }
-    createDto.map(({ date, StationId }) => {
-      queryBuilder = queryBuilder.orWhere('date = :date AND StationId = :StationId',
-        { date, StationId })
-    })
 
-    return super.create(createDto)
+    await super.create(createDto)
+
+    return await this.repo.query('DELETE\n' +
+      'FROM reading\n' +
+      'WHERE ROWID NOT IN (SELECT min(ROWID)\n' +
+      '                    FROM reading\n' +
+      '                    GROUP BY date, StationId, temperature, windSpeed, windDirection, humidity, pressure, evapoTranspiration)')
   }
 }

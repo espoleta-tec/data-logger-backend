@@ -31,5 +31,5 @@ export class CommonControllerController<EntityService extends CommonServiceServi
     return this.service.remove(id)
   }
 
-  private logger: Logger
+  protected logger: Logger
 }
