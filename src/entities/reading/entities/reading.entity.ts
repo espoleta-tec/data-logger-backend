@@ -29,6 +29,9 @@ export class Reading {
   @Column('double', { default: null })
   pressure: number
 
+  @Column('double', {default: null})
+  precipitation: number
+
   @Column('double', { default: null })
   evapoTranspiration: number
 
