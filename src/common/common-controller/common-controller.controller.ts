@@ -1,4 +1,4 @@
-import { Body, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
+import { Body, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, Req } from '@nestjs/common'
 import { CommonServiceService } from '../common-service/common-service.service'
 
 export class CommonControllerController<EntityService extends CommonServiceService<any>> {
@@ -7,8 +7,8 @@ export class CommonControllerController<EntityService extends CommonServiceServi
 
 
   @Get()
-  async findAll() {
-    return this.service.findAll()
+  async findAll(@Req() req) {
+    return this.service.findAll(req)
   }
 
   @Get(':id')

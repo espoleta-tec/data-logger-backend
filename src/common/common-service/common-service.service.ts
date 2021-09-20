@@ -1,11 +1,27 @@
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
+import { Request } from 'express'
+import { prepareQuery } from '../helpers/queryPreparation'
 
 export class CommonServiceService<EntityRepo extends Repository<any>> {
   constructor(public readonly _repository: EntityRepo) {
   }
 
-  async findAll() {
-    return this._repository.find()
+  async findAll(req: Request) {
+    let relations = []
+    const rels = req.query.relations
+    if (rels) {
+      if (typeof rels === 'string') {
+        relations = [rels]
+      } else if (Array.isArray(rels)) {
+        relations = rels
+      }
+    }
+    const queryBuilder = prepareQuery(this._repository, req)
+    const entities = await queryBuilder.getMany()
+    return this._repository.find({
+      where: { id: In(entities.map(en => en.id)) },
+      relations,
+    })
   }
 
   async findOne(id: number) {
