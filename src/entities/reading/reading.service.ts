@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { CommonServiceService } from '../../common/common-service/common-service.service'
 import { ReadingRepo } from './reading.repo'
 import { CreateReadingDto } from './dto/create-reading.dto'
@@ -7,6 +7,7 @@ import { CreateReadingDto } from './dto/create-reading.dto'
 export class ReadingService extends CommonServiceService<ReadingRepo> {
   constructor(public readonly repo: ReadingRepo) {
     super(repo)
+    this.logger = new Logger(ReadingService.name)
   }
 
   async create(createDto: CreateReadingDto | CreateReadingDto[]) {
