@@ -20,6 +20,9 @@ export class Reading {
   @Column('double', { default: null })
   windSpeed: number
 
+  @Column('double', { default: null })
+  rain: number
+
   @Column({ default: null })
   windDirection: string
 
@@ -29,7 +32,7 @@ export class Reading {
   @Column('double', { default: null })
   pressure: number
 
-  @Column('double', {default: null})
+  @Column('double', { default: null })
   precipitation: number
 
   @Column('double', { default: null })
