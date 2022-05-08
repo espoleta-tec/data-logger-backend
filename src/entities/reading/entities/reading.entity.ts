@@ -38,6 +38,9 @@ export class Reading {
   @Column('double', { default: null })
   evapoTranspiration: number
 
+  @Column('double', { default: null })
+  radiation: number
+
   @Column({ nullable: true })
   StationId: number
 
